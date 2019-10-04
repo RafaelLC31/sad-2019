@@ -66,7 +66,6 @@ namespace DIM;
  * @param $bairro bairro do Ciente
  * @param $cidade cidade do Ciente
  * @param $uf uf do Ciente
- 
  */
 
 ?> 
