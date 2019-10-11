@@ -65,7 +65,7 @@ class DimCliente{
   
   
        try{
-          $conn = new \MySQLi($dbhost, $user, $password, $banco);
+          $conn = new \MySQLi($db_host, $user, $password, $banco);
           return $conn;
        }catch(mysqli_sql_exception $e){
           throw new \Exception($e);
