@@ -3,6 +3,7 @@ namespace dimensoes;
 mysqli_report(MYSQLI_REPORT_STRICT);
 require_once('Cliente.php');
 use dimensoes\Cliente;
+
 class DimCliente{
   public function carregarDimCliente($banco){
       $dataAtual = date('Y-m-d');
