@@ -3,5 +3,6 @@ require_once('DimCliente.php');
    use dimensoes\DimCliente;
  
    $dimCliente = new DimCliente();
-   $dimCliente->carregarDimCliente(); 
+   $sumdimCliente->carregarDimCliente(); 
+   echo $sumdimCliente->carregarDimCliente(); 
 ?>

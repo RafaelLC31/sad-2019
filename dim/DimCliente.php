@@ -2,12 +2,15 @@
 namespace dimensoes;
 mysqli_report(MYSQLI_REPORT_STRICT);
 require_once('Cliente.php');
+require_once('Sumario.php');
 use dimensoes\Cliente;
+use dimensoes\Sumario;
 
 
 class DimCliente{
     public function carregarDimCliente(){
        $dataAtual = date('Y-m-d');
+       $sumario = new Sumario();
        try{
           $connDimensao = $this->conectarBanco('dm_comercial');
           $connComercial = $this->conectarBanco('bd_comercial');
@@ -42,6 +45,7 @@ class DimCliente{
                                            $cliente->idade, $cliente->rua, $cliente->bairro,$cliente->cidade,
                                            $cliente->uf, $dataAtual);
                 $slqInsertDim->execute();
+                $sumario->setQuantidadeInclusoes();
              }
              $sqlComercial->close();
              $sqlDim->close();
@@ -53,6 +57,7 @@ class DimCliente{
   
   
        }
+       return $sumario;
     }
     private function conectarBanco($banco){
        if(!defined('DS')){
