@@ -1,71 +1,79 @@
-<?php 
+<?php
+   namespace dimensoes;
+ 
+   /*
+       Model da entidade cliente
+       @author Júlio César Belenke Dos Santos
+   */
+   class Cliente{
+       /**
+       *CPF do cliente
+       *@var string
+       */
+       public $cpf;
+       /**
+       *nome do cliente
+       *@var string
+       */
+       public $nome;
+       /**
+       *Sexo do cliente
+       *@var string
+       */
+       public $sexo;
+       /**
+       *Idade do cliente
+       *@var int
+       */
+       public $idade;
+       /**
+       *Email do cliente
+       *@var string
+       */
+       public $email;
+       /**
+       *Rua do cliente
+       *@var string
+       */
+       public $rua;
+       /**
+       *Bairro do cliente
+       *@var string
+       */
+       public $bairro;
+       /**
+       *Cidade do cliente
+       *@var string
+       */
+       public $cidade;
+       /**
+       *UF do cliente
+       *@var string
+       */
+       public $uf;
+  
+       /**
+       * Carrega os atributos da classe Prospect
+       * @param $cpf CPF do cliente
+       * @param $nome nome do cliente
+       * @param $sexo sexo do cliente
+       * @param $idade Idade do cliente
+       * @param $rua rua do cliente
+       * @param $bairro bairro do cliente
+       * @param $uf UF do cliente
+       * @return Void 
+       */
+      
+       public function setCliente( $cpf,$nome, $sexo, $idade, $rua, $bairro, $cidade, $uf ){
+           $this->cpf = $cpf;
+           $this->nome = $nome;
+           $this->idade = $idade;
+           $this->rua = $rua;
+           $this->bairro = $bairro;
+           $this->cidade = $cidade;
+           $this->uf = $uf;
+       }
+   }
+?>
+ 
 
-namespace DIM;
-
-/**
-    * Model da entidade cliente
-    * @autor Rafael Laba da Costa
-*/ 
-
-    class Cliente{
-        public $cpf;
-    /**
-        * CPF do cliente
-        * @var string
-    */
-        public $nome;
-    /**
-        * nome do cliente
-        * @var string
-    */        
-        public $sexo;
-    /**
-        * sexo do cliente
-        * @var string
-    */
-        public $idade;
-    /**
-        * idade do cliente
-        * @var string
-    */
-        public $email;
-    /**
-        * email do cliente
-        * @var string
-    */
-        public $rua;
-    /**
-        * rua do cliente
-        * @var string
-    */
-        public $bairro;
-    /**
-        * bairro do cliente
-        * @var string
-    */
-        public $cidade;
-    /**
-        * cidade do cliente
-        * @var string
-    */
-        public $uf;
-    /**
-        * uf do cliente
-        * @var string
-    */
-    }
-
-/**
- * Carrega os atributos da classe Prospect
- * @param $cpf CPF do Ciente
- * @param $nome nome do Ciente
- * @param $sexo sexo do Ciente
- * @param $idade idade do Ciente
- * @param $email email do Ciente
- * @param $rua rua do Ciente
- * @param $bairro bairro do Ciente
- * @param $cidade cidade do Ciente
- * @param $uf uf do Ciente
- */
-
-?> 
