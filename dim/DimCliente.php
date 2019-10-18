@@ -37,25 +37,56 @@ class DimCliente{
                 $linhaCliente['idade'], $linhaCliente['rua'], $linhaCliente['bairro'], $linhaCliente['cidade'], $linhaCliente['uf']);
   
   
-                $slqInsertDim = $connDimensao->prepare("insert into dim_cliente
+                $sqlInsertDim = $connDimensao->prepare("insert into dim_cliente
                                                        (cpf, nome, sexo, idade, rua, bairro, cidade, uf, data_ini)
                                                        values
                                                        (?,?,?,?,?,?,?,?,?)");
-                $slqInsertDim->bind_param("sssisssss", $cliente->cpf, $cliente->nome, $cliente->sexo,
+                $sqlInsertDim->bind_param("sssisssss", $cliente->cpf, $cliente->nome, $cliente->sexo,
                                            $cliente->idade, $cliente->rua, $cliente->bairro,$cliente->cidade,
                                            $cliente->uf, $dataAtual);
-                $slqInsertDim->execute();
+                $sqlInsertDim->execute();
                 $sumario->setQuantidadeInclusoes();
              }
              $sqlComercial->close();
              $sqlDim->close();
-             $slqInsertDim->close();
+             $sqlInsertDim->close();
              $connComercial->close();
              $connDimensao->close();
           }
        }else{
-  
-  
+         $sqlComercial = $connComercial->prepare('select*from cliente');
+         $sqlComercial->execute();
+         $resultComercial = $sqlComercial->get_result();
+
+         while($linhaComercial = $resultComercial->fetch_assoc()){
+            $sqlDim->$connDimensao_>prepare('SELECT SK_cliente, (cpf, nome, sexo, idade, rua, bairro, cidade, uf
+                                             FROM dim_cliente
+                                             where cpf=?
+                                             and data_ini is null');
+            $sqlDim->bind_param('s', $linhaComercial['cpf']);                                             
+            $sqlDim->execute();
+
+            $resultDim = $sqlDim->get_result();
+            if($resultDim->num_rows === 0){
+               $sqlInsertDim = $connDimensao->prepare('INSERT INTO dim_cliente
+                                                      ((cpf, nome, sexo, idade, rua, bairro, cidade, uf, data_ini)
+                                                      VALUES
+                                                      (?,?,?,?,?,?,?,?,?)');
+               $sqlInsertDim ->bind_param('sssisss', $linhaCliente['cpf'], $linhaCliente['nome'], $linhaCliente['sexo'],
+               $linhaCliente['idade'], $linhaCliente['rua'], $linhaCliente['bairro'], $linhaCliente['cidade'], $linhaCliente['uf'], $dataAtual);
+               $sqlInsertDim->execute();
+               if($sqlInsertDim->error){
+                  throw new \Exception('Erro: Cliente novo não incluso');
+               }
+               $sumario->setQuantidadeInclusoes();
+               
+               $sqlComercial->close();
+               $sqlDim->close();
+               $sqlInsertDim->close();
+               $connDimensao->close();
+               $connComercial->close();
+            }
+         }
        }
        return $sumario;
     }
