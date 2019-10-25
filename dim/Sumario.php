@@ -1,16 +1,19 @@
 <?php
+   namespace dimensoes;
+   class Sumario{
+      public $quantidadeInclusoes;
+      public $quantidadeAlteracoes;
 
-namespace dimensoes;
+      function __construct(){
+         $this->quantidadeInclusoes = 0;
+         $this->quantidadeAlteracoes = 0;
+      }
 
-class Sumario{
-    public $quantidadeInclusoes;
-    public $quantidadeAlteracoes;
-
-    public function setQuantidadeInclusoes(){
-        $this->setQuantidadeInclusoes ++;
-    }
-    public function setQuantidadeAlteracoes(){
-        $this->setQuantidadeAlteracoes ++;
-    }
-}
+      public function setQuantidadeInclusoes(){
+         $this->quantidadeInclusoes ++;
+      }
+      public function setQuantidadeAlteracoes(){
+         $this->quantidadeAlteracoes ++;
+      }
+   }
 ?>
