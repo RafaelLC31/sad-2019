@@ -11,11 +11,19 @@ try{
 }catch(Exception $e){
    die($e->getMessage());
 }*/
-$data = "2019-10-31";
-echo "Data: ". $data."<br>";
-echo "Dia: ".date('d', strtotime($data))."<br>";
-echo "Mês: ".date('m', strtotime($data))."<br>";
-echo "Ano: ".date('Y', strtotime($data))."<br>";
+// $data = "2019-10-31";
+// echo "Data: ". $data."<br>";
+// echo "Dia: ".date('d', strtotime($data))."<br>";
+// echo "Mês: ".date('m', strtotime($data))."<br>";
+// echo "Ano: ".date('Y', strtotime($data))."<br>";
+
+require_once('DimCliente.php');
+require_once('DimData.php');
+
+$dimCliente = new DimCliente();
+$sumCliente = $dimCliente;
+
+?>
 
 
 
