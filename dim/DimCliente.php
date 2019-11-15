@@ -43,11 +43,11 @@ class DimCliente{
                $slqInsertDim->execute();
                $sumario->setQuantidadeInclusoes();
             }
-            // $sqlComercial->close();
-            // $sqlDim->close();
-            // $slqInsertDim->close();
-            // $connComercial->close();
-            // $connDimensao->close();
+            $sqlComercial->close();
+            $sqlDim->close();
+            $slqInsertDim->close();
+            $connComercial->close();
+            $connDimensao->close();
          }
       }else{//Dimensão já contém dados
          $sqlComercial = $connComercial->prepare('select*from cliente');
