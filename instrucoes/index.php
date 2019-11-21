@@ -1,19 +1,25 @@
 <?php
+require_once('Produto.php');
 
-// echo "Ola mundo";
+$conexao = new mysqli('localhost', 'root', '', 'bd_comercial');
 
+$sql = $conexao->prepare('select nome_produto, unid_medida, preco from produto');
+$sql->execute();
 
-echo calcular(3);
-$res=1;
+$resultado = $sql->get_result();
 
-function calcular($fatorial){
-    for($n=$fatorial; $n>1; $n--){
-        $mult = $n * ($n-1);
-        $res = $mult * $res;
-        $mult = 0;
-    }
-    
-return $res;
+$produtos = array();
+
+if($resultado->num_rows !== 0){
+   while($linha = $resultado->fetch_assoc()){
+      $produto = new Produto();
+      $produto->setProduto($linha['nome_produto'], $linha['unid_medida'],
+                           $linha['preco']);
+      $produtos[] = $produto;
+   }
 }
-
+foreach($produtos as $registro){
+   echo $registro->nome." - ".$registro->preco;
+   echo "<br>";
+}
 ?>
