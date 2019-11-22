@@ -81,6 +81,17 @@ class CargaFatosVenda{
                $sqlDimProduto->execute();
                $resultDimProduto = $sqlDimProduto->get_result();
                $produto = $resultDimProduto->fetch_assoc();
+
+               $sqlDimProduto = $connDimensional->prepare('INSERT INTO SK_produto FROM dim_produto
+                                                            WHERE
+                                                            codigo = ?
+                                                            AND
+                                                            data_fim IS NULL
+                                                            VALUES ("", codigo, nome, unidade_medida, valor_unitario)');
+               $sqlDimProduto->bind_param('i', $linhaItem['produto']);
+               $sqlDimProduto->execute();
+               $resultDimProduto = $sqlDimProduto->get_result();
+               $produto = $resultDimProduto->fetch_assoc();
             }
 
          }

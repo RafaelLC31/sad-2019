@@ -2,10 +2,11 @@
    require_once('DimCliente.php');
    require_once('DimData.php');
    require_once('DimProduto.php');
+   require_once('../fato/CargaFatosVenda.php');
    require_once('Sumario.php');
    //require_once('../fatos/ETLFatosVenda.php');
 
-   //use FATOS\FatosVenda;
+   use FATOS\CargaFatosVenda;
    use dimensoes\Sumario;
    use dimensoes\DimData;
    use dimensoes\DimProduto;
