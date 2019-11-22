@@ -4,7 +4,6 @@
    require_once('DimProduto.php');
    require_once('../fato/CargaFatosVenda.php');
    require_once('Sumario.php');
-   //require_once('../fatos/ETLFatosVenda.php');
 
    use FATOS\CargaFatosVenda;
    use dimensoes\Sumario;
@@ -33,7 +32,7 @@
    echo "Alterações: ".$sumProduto->quantidadeAlteracoes."<br>";
    echo "<br>==============================================<br>";
 
-   $fatosVenda = new FatosVenda();
+   $fatosVenda = new CargaFatosVenda();
    $sumFatos = $fatosVenda->carregarFatos('2017-01-01');
    echo "Fatos: <br>";
    echo "Inclusões: ".$sumFatos->quantidadeInclusoes."<br>";
