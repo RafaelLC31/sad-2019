@@ -33,10 +33,10 @@
    echo "Alterações: ".$sumProduto->quantidadeAlteracoes."<br>";
    echo "<br>==============================================<br>";
 
-   /*$fatosVenda = new FatosVenda();
+   $fatosVenda = new FatosVenda();
    $sumFatos = $fatosVenda->carregarFatos('2017-01-01');
    echo "Fatos: <br>";
    echo "Inclusões: ".$sumFatos->quantidadeInclusoes."<br>";
-   echo "<br>==============================================<br>";*/
+   echo "<br>==============================================<br>";
 
 ?>
