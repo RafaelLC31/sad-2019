@@ -81,21 +81,33 @@ class CargaFatosVenda{
                $sqlDimProduto->execute();
                $resultDimProduto = $sqlDimProduto->get_result();
                $produto = $resultDimProduto->fetch_assoc();
+            
+               $fatoGravar = new FatoVenda();  
+               $fatoGravar->sqlDeleteFatoVenda($cliente['SK_cliente'], $produto['SK_produto'], $linhaData['SK_data'], $linhaPedido['cod_pedido'], $linhaItem['quantidade'], $linhaItem['preco_unit']);
+               $sqlFatoVenda = $connDimensional->prepare('SELECT cod_fato_vendas, SK_produto, SK_data, pedido, valor_venda, quantidade_venda
+                                                         FROM fato_venda
+                                                         WHERE pedido = ?
+                                                         AND 
+                                                         SK_produto');
+               $sqlFatoVenda->blind_param('ii', $fatoGravar->pedido, $fatoGravar->SK_produto);
+               $sqlFatoVenda->execute();
+                              
+               $resultFatoVenda = $sqlFatoVenda->get_result();
+               if($resultFatoVenda->num_rows === 0){
+                  $InsertFatoVenda = $connDimensional->prepare('INSERT INTO fato_vendas
+                                                               (SK_cliente, SK_produto, SK_data, pedido, valor_venda, quantidade)
+                                                               VALUES
+                                                               (?,?,?,?,?,?)');
+                  $sqlInsertFatoVenda->execute();
+                  $sumario->setQuantidadeInclusoes();
 
-               $sqlDimProduto = $connDimensional->prepare('INSERT INTO SK_produto FROM dim_produto
-                                                            WHERE
-                                                            codigo = ?
-                                                            AND
-                                                            data_fim IS NULL
-                                                            VALUES ("", codigo, nome, unidade_medida, valor_unitario)');
-               $sqlDimProduto->bind_param('i', $linhaItem['produto']);
-               $sqlDimProduto->execute();
-               $resultDimProduto = $sqlDimProduto->get_result();
-               $produto = $resultDimProduto->fetch_assoc();
+               }
             }
 
          }
       }
+
+      return $sumario;
 
    }
 

@@ -37,7 +37,7 @@ class DimProduto{
                                                       values
                                                       (?,?,?,?,?)");
                $slqInsertDim->bind_param("issss", $produto->codigo, $produto->nome, $produto->unidadeMedida,
-                                          $produto->valorUnitario, $dataAtual);
+                                                      $produto->valorUnitario, $dataAtual);
                $slqInsertDim->execute();
                $sumario->setQuantidadeInclusoes();
             }
